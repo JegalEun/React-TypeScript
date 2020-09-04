@@ -148,9 +148,8 @@ ReactDom.render(
     </React.StrictMode>,
     document.getElementById("root")
 )
-```tsx
-`<App title="Tech Hello?" color="red"/>`
 ```
+`<App title="Tech Hello?" color="red"/>`
 title과 color를 담아서 작성한 경우 `props` 객체에 담는다.
 
 ## 상태관리
