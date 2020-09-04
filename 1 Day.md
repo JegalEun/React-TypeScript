@@ -162,7 +162,8 @@ title과 color를 담아서 작성한 경우 `props` 객체에 담는다.
 - **MobX**
 
  기능이 많고 응용 범위가 매우 넓다.
-
+ 
+----
 #### 수업 참조 링크
 - [TypeScript Code 테스트 공간]()
 - [통합 IDE](https://codesandbox.io/index2)
