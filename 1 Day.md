@@ -53,6 +53,16 @@ const foo : Foo = {
 ``` 
 ` Foo`  객체의 타입은 ` number` 타입과 ` string` 타입을 가지고 있다.
 
+객체 타입 내부 타입을 지정할 때도 타입 별칭을 동일하게 사용할 수 있다.
+``` js
+type Age = number;
+
+type Foo = {
+  age : Age,
+  name : string;
+};
+``` 
+객체 타입을 정의하는 다른 방법으로는 `interface` 키워드가 존재한다.
 ``` js
 type Age = number;
 
@@ -66,10 +76,88 @@ const bar : Bar = {
   name : "Kim";
 }
 ```
+`type` 키워드로 선언한 객체 타입과 동일하게 `interface`를 이용해 객체 타입을 선언할 수 있다.
 
+## React App 생성하기
+`npm` 패키지의 `create-react-app`을 이용해 프로젝트 생성할 수 있다.
+```js
+yarn create react-app<app_name> --template typescript
+```
 
-## React의 엘리먼트, 컴포넌트, ReactDom.render
+## React 컴포넌트 만들기
+**index.tsx**
+```tsx
+import React from "react";
+import ReactDom from "react-dom";
 
+function App() {
+    return (
+        <h1>Tech Hello!</h1>
+    );
+}
+
+ReactDom.render(          //가상돔에 컴포넌트를 그리는 함수
+    <React.StricMode>     //렌더링될 컴포넌트
+        <App/>
+    </React.StrictMode>,  //렌더링된 컴포넌트를 넣을 HTML 요소
+    document.getElementById("root")
+)
+```
+
+## Babel을 통한 React 컴포넌트 트랜스 파일링
+- 변환 전 컴포넌트
+```tsx
+function App() {
+    return <h1 id="header">Tech Hello!</h1>;
+}
+```
+
+- 변환 후 컴포넌트
+```tsx
+function App() {
+    return /*@__PURE__*/ React.createElement(
+        "h1",
+        {
+            id: "header",
+        },
+        "Hello Tech"
+    );
+}
+```
+html 태그 형태를 `React`의 `createElemnet` 함수를 사용하는 형태로 트랜스 파일링 한다.
+
+## 컴포넌트 확장
+``` tsx
+interface AppProps {
+    title: string;
+    color: string;
+}
+```
+`interface`를 이용해 `AppProps` 타입을 정의할 수 있다. `props` 객체에 담겨 있는 인자들을 
+`props.title`, `props.color`와 같이 사용할 수 있다.
+
+```tsx 
+function App(props: AppProps) {
+    return <h1 id="header">{props.title}</h1>;
+}
+``` 
+``` tsx
+ReactDom.render(
+    <React.StricMode>
+        <App title="Tech Hello?" color="red"/>
+    </React.StrictMode>,
+    document.getElementById("root")
+)
+```tsx
+`<App title="Tech Hello?" color="red"/>`
+```
+title과 color를 담아서 작성한 경우 `props` 객체에 담는다.
+## 상태관리
+- Redux
+매우 간단하게 사용 가능한 상태 관리 라이브러리이다. 
+가장 대표적인 상태관리 라이브러리이다.
+- MobX
+기능이 많고 응용 범위가 매우 넓다.
 
 #### 수업 참조 링크
 - [TypeScript Code 테스트 공간]()
